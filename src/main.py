@@ -19,8 +19,10 @@ if __name__ == '__main__':
     path = "/Users/tcaron/Documents/Python Scripts/KaggleS3E5/data/"
     train = pd.read_csv(path+"train.csv")
     test = pd.read_csv(path+"test.csv")
+    origin = pd.read_csv(path+"WineQT.csv")
     Id = test[["Id"]]
     X_test = test.drop(columns = "Id")
+    train = pd.concat([train,origin],ignore_index=True)
     tupleXY = mp.SelfSplitTrain(train)
     y_pred = mt.model_training(tupleXY[0], tupleXY[1], tupleXY[2], tupleXY[3], X_test)
     Id["quality"]=y_pred
