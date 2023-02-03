@@ -10,6 +10,6 @@ import numpy as np
 
 def SelfSplitTrain(df,test_size=0.2):
     X = df.drop(columns=["Id","quality"])
-    y = df[["quality"]]
+    y = df[["quality"]].values
     X_train, X_val, y_train, y_val = train_test_split(X,y,test_size=test_size,random_state=42)
     return (X_train, X_val, y_train, y_val)

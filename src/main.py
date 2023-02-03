@@ -8,6 +8,7 @@ import sys
 sys.path.insert(0, './src')
 from modelling import model_prep as mp
 from modelling import model_train as mt
+from modelling import model_train_rf as mtrf
 import pandas as pd
 import warnings
 
@@ -24,7 +25,7 @@ if __name__ == '__main__':
     X_test = test.drop(columns = "Id")
     train = pd.concat([train,origin],ignore_index=True)
     tupleXY = mp.SelfSplitTrain(train)
-    y_pred = mt.model_training(tupleXY[0], tupleXY[1], tupleXY[2], tupleXY[3], X_test)
+    y_pred = mtrf.model_training(tupleXY[0], tupleXY[1], tupleXY[2], tupleXY[3], X_test)
     Id["quality"]=y_pred
     print(Id.head(3))
     Id.to_csv("sample_submission.csv",index=False)
